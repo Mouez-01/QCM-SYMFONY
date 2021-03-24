@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quiz index{% endblock %}
+
+{% block body %}
+<div class="container bg-dark p-3 mt-5 rounded">
+    <div class=" py-1 text-center">
+        <h1 class="text-white">Quiz index :</h1>
+    </div>
+    <table class="rounded primary-border table bg-light">
+        <thead>
+            <tr>
+                <th>Author</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Max Points</th>
+                <th>Right</th>
+                <th>Wrong</th>
+                <th>Neutral</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for quiz in quizzes %}
+
+            <tr>
+                <td>{{ quiz.author.firstname| capitalize }} - {{ quiz.author.lastname| capitalize }}</td>
+                <td>{{ quiz.name }}</td>
+                <td>{{ quiz.description }}</td>
+                <td>{{ quiz.maxPoints }}</td>
+                <td>{{ quiz.rightAmountPoints }}</td>
+                <td>{{ quiz.wrongAmountPoints }}</td>
+                <td>{{ quiz.neutralAmountPoints }}</td>
+            <td>
+                    <a href="{{ path('quiz_show', {'id': quiz.id}) }}">show</a>
+                    <a href="{{ path('quiz_edit', {'id': quiz.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="{{ path('quiz_new') }}">Create new</a>
+</div>
+{% endblock %}

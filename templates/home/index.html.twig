@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Web@cademie QCM{% endblock %}
+
+{% block body %}
+    <div class="container-fluid my-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                {% if is_granted('ROLE_TEACHER') %}
+                    {{ include('quiz/display.html.twig') }}
+                {% elseif is_granted('ROLE_STUDENT')  %}
+                        {% if sessions is defined %}
+                            {{ include('session/student.html.twig') }}
+                        {% endif %}
+                     {{ include('result_qcm/student.html.twig') }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

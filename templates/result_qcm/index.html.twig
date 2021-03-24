@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ResultQcm{% endblock %}
+
+{% block body %}
+    <div class="container bg-dark p-3 mt-5 rounded">
+        {% if is_granted('ROLE_TEACHER') %}
+            {{ include('result_qcm/teacher.html.twig') }}
+        {% elseif is_granted('ROLE_STUDENT') %}
+           {{ include('result_qcm/student.html.twig') }}
+        {% else %}
+            <div class=" p-4 alert alert-warning text-center">
+                <h3 >
+                    You are not allowed to be here...
+                    <br>please log in
+                </h3>
+                    <hr>
+                <a href="{{ path('auth_login') }}" class="btn btn-success">Login</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

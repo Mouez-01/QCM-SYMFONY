@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Session{% endblock %}
+
+    {% block body %}
+
+    <div class="container col-lg-4 mx-auto mt-5">
+        <div class="card">
+            <div class="card-header">
+                Create new Session
+            </div>
+            <div class="card-body">
+                {% if group|length > 0 %}
+                    {{ include('session/_form.html.twig') }}
+                {% else %}
+                    <div class="container text-center">
+                        <p class="alert alert-warning">
+                            You don't have any group yet... <br> Please create one before going any further
+                        </p>
+                        <a href="{{ path('class_room_new') }}" class="btn btn-success">Create new</a>
+                    </div>
+                {% endif %}
+                <hr>
+                <a href="{{ path('session_index') }}">back to list</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
